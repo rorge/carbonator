@@ -165,7 +165,9 @@ namespace Crypton.Carbonator
         {
             if (string.IsNullOrEmpty(input))
                 return replacementChar.ToString(); // return just the character if input is null or empty
-            return new Regex(@"\W").Replace(input, replacementChar.ToString());
+            // \W is 'Not Word', so matches anything not a group of characters
+            // (?!-) is a negative lookahead, it finds '-' and excludes it from the matching
+            return new Regex(@"(?!-)\W").Replace(input, replacementChar.ToString());
         }
 
         /// <summary>
